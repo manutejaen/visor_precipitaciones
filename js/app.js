@@ -10,11 +10,14 @@ require([
   "esri/symbols/PolygonSymbol3D",
   "esri/symbols/ExtrudeSymbol3DLayer",
 
+  "esri/widgets/Search",
+
   "dojo/domReady!"
 ], 
 function(Map, 
-        SceneView, FeatureLayer,
-        SimpleRenderer, SimpleFillSymbol, PolygonSymbol3D, ExtrudeSymbol3DLayer
+        SceneView, FeatureLayer, 
+        SimpleRenderer, SimpleFillSymbol, PolygonSymbol3D, ExtrudeSymbol3DLayer,
+        Search
         ){
 
 
@@ -45,7 +48,7 @@ function(Map,
       field: "ene",
       maxDataValue: 100,
       minDataValue: 0,
-      colors: ["#FFFCD4","#350242"]
+      colors: ["#BED2FF","#0084A8"]
     }]
   });
 
@@ -53,7 +56,8 @@ function(Map,
     url: "http://services6.arcgis.com/IKNzV87WiinOV4AF/arcgis/rest/services/Precipitaciones_provincia_mes/FeatureServer/0",
     renderer: renderer,
     outFields: ["*"],
-    popupaTemplate:  {
+    //opacity: 0.8,
+    popupTemplate:  {
           title: "{Texto}, {CCAA}",
           content: "Prueba",
           fieldInfos: [
@@ -67,6 +71,9 @@ function(Map,
         }
   });
 
+
+
+  //Map and Scene
   // Code to create the map and view will go here
   var map = new Map({
     basemap: "dark-gray",
@@ -74,11 +81,23 @@ function(Map,
     layers: [precipitaciones_lyr]
   });//map
 
-  var view = SceneView({
+  var view = new SceneView({
     container: "viewDiv", //Dom reference
     map:map, // Map object above created
     center: [-3.7038, 40.4168],
-    zoom: 4
+    zoom: 4,
+    padding: {top: 50}
   });
+
+
+  //Search Widget
+
+  // Search parameters
+  var searchWidget = new Search({
+      view: view
+    }, "searchWidgetDiv");
+  searchWidget.startup();
+
+
 
 });//require
