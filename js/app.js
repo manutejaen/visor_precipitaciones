@@ -12,6 +12,15 @@ require([
 
   "esri/widgets/Search",
 
+  // Bootstrap
+  "bootstrap/Collapse", 
+  "bootstrap/Modal",
+  "bootstrap/Dropdown",
+  "bootstrap/Tab",
+  
+  // Calcite-maps
+  "calcite-maps/calcitemaps-v0.2",
+
   "dojo/domReady!"
 ], 
 function(Map, 

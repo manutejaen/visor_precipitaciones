@@ -3,8 +3,22 @@
     padding: 0;
     margin: 0;
     width: 100%;
+    height: 100%;
   }
 
+  .calcite-panels,
+  .panel,
   .navbar {
     background-color: #BED2FF;
+  }
+
+  .calcite-panels {
+    width: auto;
+    max-width: 30%;
+    top: 55;
+    /*width: 450px;*/
+  }
+
+  .panel-body {
+    width: auto;
   }
