@@ -108,5 +108,23 @@ function(Map,
   searchWidget.startup();
 
 
+  //Charts
+
+  var chart = new Cedar({
+    type:"bar",
+    dataset: {
+      url:"http://services6.arcgis.com/IKNzV87WiinOV4AF/arcgis/rest/services/Precipitaciones_provincia_mes/FeatureServer/0",
+      query: {
+        orderByFields: "ene DESC"
+      },
+      mappings: {
+        "x": {"field":"Texto","label":""},
+        "y": {"field":"ene","label":"Precipitaciones (mm)"}
+      }
+    } //dataset
+  }).show({
+    elementId: "#barChart"
+  }); //chart
+
 
 });//require

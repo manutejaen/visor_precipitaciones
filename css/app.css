@@ -14,11 +14,21 @@
 
   .calcite-panels {
     width: auto;
-    max-width: 30%;
     top: 55;
     /*width: 450px;*/
   }
 
   .panel-body {
     width: auto;
+  }
+
+  #containerChart {
+    position: absolute;
+    left: 1%;
+    bottom: 0;
+  }
+
+
+  #barChar {
+    height: auto;
   }
