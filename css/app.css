@@ -1,4 +1,13 @@
-/* app css stylesheet */
+/* app css stylesheet 
+
+Margin generates white space around elements. Its properties are auto, lenght, % of the width of the containing element, inherit should be inherit from the parent element
+Top, right, bottom, left (clockwise)
+Auto center horiontically within its container
+*/
+
+/*If there is no Max-width and max-height the browser will ad scroll-bar when it is resized*/
+/*Max-width instead of margins auto will improve the browser's handling of small windows*/
+/*Differences between visibility and display. Visibility take up place, even if it is not shown*/
  html, body, #viewDiv {
     padding: 0;
     margin: 0;
@@ -12,23 +21,32 @@
     background-color: #BED2FF;
   }
 
-  .calcite-panels {
-    width: auto;
-    top: 55;
-    /*width: 450px;*/
-  }
-
-  .panel-body {
-    width: auto;
-  }
-
-  #containerChart {
-    position: absolute;
-    left: 1%;
-    bottom: 0;
-  }
-
-
-  #barChar {
+  #calcitePanel {
     height: auto;
+    right: 20px;
+    top: 55px;
+  }
+
+  #panelChart {
+    width: : 100%;
+  }
+
+  #barChart {
+    padding-left: 3%;
+  }
+
+
+  #panelPrueba {
+    position: absolute;
+    bottom: 2%;
+    right: 15px;
+
+    height: 30%;
+    max-height: 200px;
+    width: 50%;
+    max-width: 650px;
+    
+    margin: 10px;
+    background-color: #BED2FF;
+    overflow-y: scroll;
   }
