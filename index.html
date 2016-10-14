@@ -89,23 +89,34 @@
     <div id="panelStats" class="panel collapse in" >
       <div id="headingCode" class="panel-heading" role="tab">
         <div class="panel-title">
-          <a class="panel-toggle" role="button" data-toggle="collapse" href="#panelChart" data-parent="#panelAccordion" aria-expanded="true" aria-controls="collapseInfo"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span><span class="panel-label"> Estadísticas</span></a>
+          <a class="panel-toggle" role="button" data-toggle="collapse" href="#panelChart" data-parent="#panelAccordion" aria-expanded="true" aria-controls="collapseInfo"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span><span class="panel-label"> Por provincia</span></a>
           <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelStats"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>  
         </div>
       </div>
     
       <div id="panelChart" class="panel-body panel-collapse collapse in"">
-        <div id="barChart" ></div> 
-      </div> 
-    
+        <div id="barChart"></div> 
+      </div>     
+      
+
+      <div id="headingCode" class="panel-heading" role="tab">
+        <div class="panel-title">
+          <a class="panel-toggle" role="button" data-toggle="collapse" href="#panelPrueba" data-parent="#panelAccordion" aria-expanded="true" aria-controls="collapseInfo"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span><span class="panel-label"> Mensuales</span></a>
+          <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelStats"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>  
+        </div>
+      </div>
+
+      <div id="panelPrueba" class="panel-collapse collapse in">
+        <div id="barChart2" ></div> 
+      </div>  
     </div>
+
+    
+
   </div> 
   <!-- /.panel-group -->
 
-  <div id="panelPrueba">
-    <div id="barChart2" ></div> 
-  </div>  
-
+  
   <!-- Vendor: Calcite Maps and Bootstrap -->
   <script type="text/javascript">
     var dojoConfig = {

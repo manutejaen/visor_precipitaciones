@@ -151,7 +151,7 @@ function(Map,
         orderByFields: "ene DESC"
       },
       mappings: {
-        "x": {"field":"ene","label":"Precipitaciones (mm)"},
+        "x": {"field":"ene","label":""},
         "y": {"field":"Texto","label":""}
       }
     } //dataset
@@ -166,7 +166,7 @@ function(Map,
 
   chart.show({
     elementId: "#barChart",
-    width:300,
+    width:370,
     height:600
   }); //chart
 
@@ -175,27 +175,79 @@ function(Map,
   var chart2 = new Cedar({
     type:"bar",
     dataset: {
-      url:"http://services6.arcgis.com/IKNzV87WiinOV4AF/arcgis/rest/services/Precipitaciones_provincia_mes/FeatureServer/0",
-      query: {
-        orderByFields: "ene DESC"
+        data: {"features":[
+      {
+        "attributes": {
+          "Mes": "Enero",
+          "Precipitaciones": 327
+        }
+      },{
+        "attributes": {
+          "Mes": "Febrero",
+          "Precipitaciones": 517
+        }
+      },{
+        "attributes": {
+          "Mes": "Marzo",
+          "Precipitaciones": 652
+        }
+      },{
+        "attributes": {
+          "Mes": "Abril",
+          "Precipitaciones": 325
+        }
+      },{
+        "attributes": {
+          "Mes": "Mayo",
+          "Precipitaciones": 327
+        }
+      },{
+        "attributes": {
+          "Mes": "Junio",
+          "Precipitaciones": 98
+        }
+      },{
+        "attributes": {
+          "Mes": "Julio",
+          "Precipitaciones": 58
+        }
+      },{
+        "attributes": {
+          "Mes": "Agosto",
+          "Precipitaciones": 658
+        }
+      },{
+        "attributes": {
+          "Mes": "Septiembre",
+          "Precipitaciones": 198
+        }
+      },{
+        "attributes": {
+          "Mes": "Octubre",
+          "Precipitaciones": 238
+        }
+      },{
+        "attributes": {
+          "Mes": "Noviembre",
+          "Precipitaciones": 125
+        }
+      },{
+        "attributes": {
+          "Mes": "Diciembre",
+          "Precipitaciones": 367
+        }
       },
+    ]},
       mappings: {
-        "x": {"field":"Texto","label":"provincia"},
-        "y": {"field":"ene","label":"Precipitaciones (mm)"}
+        "x": {"field":"Mes","label":""},
+        "y": {"field":"Precipitaciones","label":"Precipitación mm"}
       }
     } //dataset
   });
 
-
-  // Text mouse over chart
-  chart2.tooltip = {
-    "title": "{Texto}",
-    "content": "{ene} mm en el mes de Enero"
-  }
-
   chart2.show({
     elementId: "#barChart2",
-    height:200
+    height: 175
   }); //chart
 
 });//require

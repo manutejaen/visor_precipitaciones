@@ -28,25 +28,27 @@ Auto center horiontically within its container
   }
 
   #panelChart {
-    width: : 100%;
+    width: auto;
   }
 
   #barChart {
     padding-left: 3%;
   }
 
-
-  #panelPrueba {
+/*
+  #barChart2 {
+    margin: auto; 
+    padding-top: 10px;
+    background-color: #BED2FF;
     position: absolute;
     bottom: 2%;
     right: 15px;
+  }
+  */
 
-    height: 30%;
-    max-height: 200px;
-    width: 50%;
-    max-width: 650px;
-    
-    margin: 10px;
+  #barChart2 {
+    margin: auto; 
+    padding-top: 10px;
     background-color: #BED2FF;
-    overflow-y: scroll;
+    overflow-x: auto; 
   }
