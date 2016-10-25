@@ -9,8 +9,11 @@ require([
   "esri/Graphic",
   "esri/renderers/SimpleRenderer",
   "esri/symbols/SimpleFillSymbol",
+   "esri/symbols/ObjectSymbol3DLayer",
   "esri/symbols/PolygonSymbol3D",
   "esri/symbols/ExtrudeSymbol3DLayer",
+
+  "esri/tasks/support/Query",
 
   "esri/widgets/Search",
 
@@ -27,7 +30,8 @@ require([
 ], 
 function(Map, 
         SceneView, FeatureLayer, GraphicsLayer,
-        Graphic, SimpleRenderer, SimpleFillSymbol, PolygonSymbol3D, ExtrudeSymbol3DLayer,
+        Graphic, SimpleRenderer, SimpleFillSymbol, ObjectSymbol3DLayer, PolygonSymbol3D, ExtrudeSymbol3DLayer,
+        Query,
         Search
         ){
 
@@ -96,44 +100,56 @@ function(Map,
     padding: {top: 50}
   });
 
+
+
+
+
   //Map and view events
   // Set up a click event handler and retrieve the screen point
-  view.on("click", function(evt) {
-    var screenPoint = evt.screenPoint;
+  //Set this on a featureLayer.Load event
+  precipitaciones_lyr.load().then(attributesReady);
 
-    // the hitTest() checks to see if any graphics in the view
-    // intersect the given screen point
-    view.hitTest(screenPoint)
-      .then(getGraphics);
-  });
+  function attributesReady(){
+    view.on("click", function(evt) {
+        // get the returned screenPoint and use it
+        // with hitTest to find if any graphics were clicked
+        // (using promise chaining for cleaner code and error handling)
+      view.hitTest(evt.screenPoint).then(function(response) {
 
-  function getGraphics(response) {
-    // the topmost graphic from the click location
-    // and display select attribute values from the
-    // graphic to the user
-    var graphic = response.results[0].graphic;
-    var attributes = graphic.attributes;
-    var provincia = attributes.Texto;
-    var month = attributes.ene;
-
-    // symbolize all line segments with the given
-    // storm name with the same symbol
-    var renderer = new UniqueValueRenderer({
-      field: "NAME",
-      defaultSymbol: layer.renderer.symbol || layer.renderer.defaultSymbol,
-      uniqueValueInfos: [{
-        value: name,
-        symbol: new SimpleLineSymbol({
-          color: "orange",
-          width: 5
-        })
-      }]
+        // we're only interested in the first result
+        var result = response.results[0];
+        if (result && result.graphic) {
+          return result.graphic;
+        }
+      }).then(function(graphic){
+        window.alert("Click event checked");
+        var objectid = graphic.attributes.OBJECTID; //mind the capital letters in fields
+        var query = new Query();
+        query.where = "objectid = " + objectid;
+        query.returnGeometry = false; 
+        query.outFields = ["Texto","ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+        // query method of featureLayers
+        return precipitaciones_lyr.queryFeatures(query);
+        console.log(query.where);
+      }).then(function(results){
+        
+        console.log("Proper events");
+        console.log(results.features.length);
+        console.log(results.features[0].attributes);
+        if (results && results.features.length > 0) {
+          //The first time this is done the chart2 will be empty.
+          //here it is placed the chart2.dataset and update event
+          //var dataset = fill with results.features.
+          //set dataset in chart2 and update
+        }
+      }).otherwise(function(err){
+        console.error(err);
+      });
     });
-    layer.renderer = renderer;
-  }
+  }; //function attributesReady
+
 
   //Search Widget
-
   // Search parameters
   var searchWidget = new Search({
       view: view
@@ -179,7 +195,7 @@ function(Map,
       {
         "attributes": {
           "Mes": "Enero",
-          "Precipitaciones": 327
+          "Precipitaciones": 652
         }
       },{
         "attributes": {
@@ -236,7 +252,7 @@ function(Map,
           "Mes": "Diciembre",
           "Precipitaciones": 367
         }
-      },
+      }
     ]},
       mappings: {
         "x": {"field":"Mes","label":""},
